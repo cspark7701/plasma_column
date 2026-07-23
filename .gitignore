@@ -1,0 +1,48 @@
+# Bytecode files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+env/
+venv/
+.venv/
+env-bak/
+*~
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.tar.gz
+*.zip
+
+# Log files
+*.log
+
+# IDE specific files
+.idea/
+.project
+.pydevproject.xml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# swap files
+.*.swp
+
+# jupyter checkpoint
+.ipynb_checkpoints
+*checkpoint.ipynb
+
+analysis_plots
+archives
+data
+logs
+logs_tmp
+runs
+tests
+
+warpx_ion_impact_ionization_patch
+warpx_proton_impact_cross_sections_linear
