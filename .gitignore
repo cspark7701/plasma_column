@@ -46,3 +46,6 @@ tests
 
 warpx_ion_impact_ionization_patch
 warpx_proton_impact_cross_sections_linear
+
+00_plasma_column_antigravity_tasks/
+01_plasma_column_publication_antigravity_tasks/
