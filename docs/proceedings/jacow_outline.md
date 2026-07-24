@@ -1,7 +1,7 @@
 # JACOW Conference Proceeding Outline
 
 **Title**: Numerical and Analytical Modeling of a Compact Plasma Neutralizer for Cyclotron Axial Injection  
-**Authors**: C. Spark et al.  
+**Authors**: Chong Shik Park et al.  
 
 ---
 

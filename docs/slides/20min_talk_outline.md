@@ -1,7 +1,7 @@
 # 20-Minute Presentation Slide Outline
 
 **Title**: Plasma-Assisted Neutralization for High-Current Cyclotron Axial Injection  
-**Speaker**: C. Spark  
+**Speaker**: Chong Shik Park
 **Duration**: 20 Minutes (15 min presentation + 5 min Q&A)  
 
 ---
