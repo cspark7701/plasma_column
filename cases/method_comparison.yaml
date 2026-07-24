@@ -1,0 +1,86 @@
+# Simulation Method Comparison Matrix Configuration
+
+matrix_name: plasma_column_method_comparison
+description: Systematic comparison matrix of neutralization simulation methods, gases, and pressures.
+
+defaults:
+  beam:
+    energy_keV: 30.0
+    current_mA: 10.0
+    radius_m: 0.002
+    rms_divergence: 0.0
+  solenoid:
+    Bz_T: 0.15
+  numerics:
+    nx: 32
+    ny: 32
+    nz: 256
+    xmax_m: 0.01
+    ymax_m: 0.01
+    zmin_m: -0.02
+    zmax_m: 0.24
+    max_steps: 2000
+
+cases:
+  - case_name: vacuum_reference
+    method: vacuum
+    method_category: baseline_reference
+    physics_nature: Exact uncompensated vacuum beam propagation
+    gas: none
+    pressure_torr: 0.0
+
+  - case_name: seeded_H2_1e-6Torr
+    method: seeded_compensation
+    method_category: static_analytic_seeded
+    physics_nature: Static analytical electron density estimate
+    gas: H2
+    pressure_torr: 1.0e-6
+
+  - case_name: seeded_H2_1e-5Torr
+    method: seeded_compensation
+    method_category: static_analytic_seeded
+    physics_nature: Static analytical electron density estimate
+    gas: H2
+    pressure_torr: 1.0e-5
+
+  - case_name: seeded_Kr_1e-6Torr
+    method: seeded_compensation
+    method_category: static_analytic_seeded
+    physics_nature: Static analytical electron density estimate
+    gas: Kr
+    pressure_torr: 1.0e-6
+
+  - case_name: seeded_Kr_1e-5Torr
+    method: seeded_compensation
+    method_category: static_analytic_seeded
+    physics_nature: Static analytical electron density estimate
+    gas: Kr
+    pressure_torr: 1.0e-5
+
+  - case_name: callback_H2_dynamic
+    method: python_callback
+    method_category: dynamic_source_approximation
+    physics_nature: Dynamic pair injection via python callback
+    gas: H2
+    pressure_torr: 1.0e-5
+
+  - case_name: callback_Kr_dynamic
+    method: python_callback
+    method_category: dynamic_source_approximation
+    physics_nature: Dynamic pair injection via python callback
+    gas: Kr
+    pressure_torr: 1.0e-6
+
+  - case_name: cxx_H2_mcc_or_custom
+    method: cxx_mcc_custom
+    method_category: full_self_consistent_cxx_mcc
+    physics_nature: C++ MCC Monte Carlo collision tracking
+    gas: H2
+    pressure_torr: 1.0e-5
+
+  - case_name: cxx_Kr_mcc_or_custom
+    method: cxx_mcc_custom
+    method_category: full_self_consistent_cxx_mcc
+    physics_nature: C++ MCC Monte Carlo collision tracking
+    gas: Kr
+    pressure_torr: 1.0e-6

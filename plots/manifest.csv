@@ -1,0 +1,4 @@
+filename_png,filename_pdf,figure_title,description
+axial_injection_layout.png,axial_injection_layout.pdf,Axial Injection Beamline Layout,Schematic layout: buncher -> plasma neutralizer -> solenoid -> Q1 -> Q2 -> inflector
+h2_kr_cross_sections.png,h2_kr_cross_sections.pdf,H2 vs Kr Cross Section Comparison,Proton-impact ionization cross sections and 30 keV operating points for H2 and Kr
+bunched_beam_perveance.png,bunched_beam_perveance.pdf,RF-Bunched Beam Peak Space-Charge Reduction,"Peak effective perveance ratio K_eff,peak / K0,peak vs bunching factor B_f"

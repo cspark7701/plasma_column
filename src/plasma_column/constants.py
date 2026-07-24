@@ -1,0 +1,27 @@
+"""
+src/plasma_column/constants.py
+
+Fundamental physical constants and conversion factors used throughout the plasma column project.
+All values are in SI units unless explicitly noted.
+"""
+
+import math
+
+# Fundamental physical constants (CODATA 2018 / standard physics values)
+C: float = 299792458.0                # Speed of light [m/s]
+QE: float = 1.602176634e-19           # Elementary charge [C]
+ME: float = 9.1093837015e-31          # Electron mass [kg]
+MP: float = 1.67262192369e-27         # Proton mass [kg]
+AMU: float = 1.66053906660e-27        # Atomic mass unit [kg]
+KB: float = 1.380649e-23              # Boltzmann constant [J/K]
+EPSILON_0: float = 8.8541878128e-12   # Vacuum permittivity [F/m]
+MU_0: float = 4.0 * math.pi * 1.0e-7  # Vacuum permeability [H/m]
+
+# Mass of neutral species [kg]
+MH2: float = 2.01588 * AMU             # H2 molecular mass [kg]
+MKR: float = 83.798 * AMU              # Kr atomic mass [kg]
+
+# Unit conversions
+TORR_TO_PA: float = 133.3223684       # 1 Torr in Pa
+EV_TO_JOULE: float = QE               # 1 eV in Joules
+EV_TO_KELVIN: float = QE / KB         # 1 eV in Kelvin

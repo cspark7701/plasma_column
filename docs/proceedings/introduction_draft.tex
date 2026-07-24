@@ -1,0 +1,36 @@
+% JACOW-style Introduction Draft
+\documentclass[banner]{jacow}
+
+\begin{document}
+
+\title{NUMERICAL AND ANALYTICAL MODELING OF A COMPACT PLASMA NEUTRALIZER FOR CYCLOTRON AXIAL INJECTION}
+
+\author{C. Spark\thanks{cspark@example.org}, Collaboration Team}
+
+\maketitle
+
+\begin{abstract}
+High-current compact cyclotrons require low-emittance transport of multi-milliampere low-energy proton beams through axial injection lines into a spiral inflector. Uncompensated space-charge forces in 30~keV beamlines cause rapid transverse beam blowup prior to matching lenses. This paper presents analytical models and Particle-in-Cell (PIC) WarpX simulations of a compact gas-ionized plasma neutralizer cell placed directly upstream of the main solenoid. We compare H$_2$ and Kr gas performance and evaluate the space-charge dilution caused by upstream RF bunching.
+\end{abstract}
+
+\section{INTRODUCTION}
+
+High-intensity compact cyclotrons are widely used for medical isotope production and industrial applications. Transporting multi-mA, 30~keV proton beams through compact Low-Energy Beam Transport (LEBT) lines presents severe space-charge challenges. The baseline axial-injection layout considered in this project is:
+\begin{equation}
+\text{buncher} \rightarrow \text{plasma neutralizer} \rightarrow \text{solenoid} \rightarrow \text{Q1} \rightarrow \text{Q2} \rightarrow \text{inflector}
+\end{equation}
+Crucially, the plasma neutralizer cell is located \emph{upstream} of the primary solenoid lens. This geometry mitigates space-charge expansion before the beam reaches the strong focusing optics.
+
+While residual-gas space-charge compensation has been extensively investigated in long DC LEBT lines, single-pass cyclotron axial injection presents distinct physical constraints:
+\begin{enumerate}
+    \item \textbf{Compact Length}: Neutralization must occur over a short interaction region ($L \approx 20$~cm) without excessive gas leakage into the main cyclotron vacuum vessel.
+    \item \textbf{Upstream RF Bunching}: The presence of an upstream RF buncher converts the continuous beam into periodic micro-bunches ($B_f = I_{\text{peak}} / I_{\text{avg}} \approx 5$). Because background plasma electrons respond primarily to the time-averaged potential, the instantaneous peak-bunch perveance ratio is given by:
+    \begin{equation}
+    \frac{K_{\text{eff,peak}}}{K_{0,\text{peak}}} \approx 1 - \frac{\eta_{\text{avg}}}{B_f}
+    \end{equation}
+    Even at 90\% average neutralization, 82\% of the peak space-charge force remains uncompensated during bunch passage.
+\end{enumerate}
+
+In this paper, we evaluate neutralization kinetics, compare H$_2$ and Kr gas cell performance using WarpX PIC simulations, and define local vs.\ global space-charge diagnostic metrics.
+
+\end{document}

@@ -1,0 +1,42 @@
+# Baseline Kr Plasma Neutralizer Case Configuration
+case_name: seeded_Kr_baseline
+description: 30 keV 10 mA proton beam passing through a 20 cm Kr plasma column cell at 1e-6 Torr.
+
+# Beam parameters
+beam:
+  species: proton
+  energy_keV: 30.0
+  current_mA: 10.0
+  radius_m: 0.002
+  rms_divergence: 0.0
+
+# Gas & plasma cell parameters
+plasma:
+  gas: Kr
+  pressure_torr: 1.0e-6
+  column_zmin_m: 0.0
+  column_length_m: 0.20
+  plasma_radius_m: 0.003
+  neutralization: -1.0
+  steady_state_neutralization: 0.90
+  plasma_age_s: 2.0e-4
+  electron_temperature_eV: 1.0
+
+# External fields
+solenoid:
+  Bz_T: 0.15
+
+# Numerical & diagnostic parameters
+numerics:
+  nx: 32
+  ny: 32
+  nz: 256
+  xmax_m: 0.01
+  ymax_m: 0.01
+  zmin_m: -0.02
+  zmax_m: 0.24
+  max_steps: 2000
+  cfl: 0.7
+  nppc_beam: 4
+  nppc_plasma: 4
+  mcc: electron_impact

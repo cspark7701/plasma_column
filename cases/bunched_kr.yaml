@@ -1,0 +1,44 @@
+# RF-Bunched Beam Kr Plasma Neutralizer Case Configuration
+case_name: bunched_Kr_baseline
+description: 30 keV RF-bunched 10 mA average proton beam (B_f=5) in 1e-6 Torr Kr plasma column.
+
+# Beam parameters
+beam:
+  species: proton
+  energy_keV: 30.0
+  current_mA: 10.0
+  radius_m: 0.002
+  rms_divergence: 0.0
+  bunching:
+    rf_frequency_hz: 5.0e7
+    phase_width_deg: 36.0
+    bunching_factor: 5.0
+
+# Gas & plasma cell parameters
+plasma:
+  gas: Kr
+  pressure_torr: 1.0e-6
+  column_zmin_m: 0.0
+  column_length_m: 0.20
+  plasma_radius_m: 0.003
+  steady_state_neutralization: 0.90
+  electron_temperature_eV: 1.0
+
+# External fields
+solenoid:
+  Bz_T: 0.15
+
+# Numerical & diagnostic parameters
+numerics:
+  nx: 32
+  ny: 32
+  nz: 256
+  xmax_m: 0.01
+  ymax_m: 0.01
+  zmin_m: -0.02
+  zmax_m: 0.24
+  max_steps: 2000
+  cfl: 0.7
+  nppc_beam: 4
+  nppc_plasma: 4
+  mcc: electron_impact
