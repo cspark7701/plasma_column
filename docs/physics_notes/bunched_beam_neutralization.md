@@ -1,40 +1,41 @@
-# Bunched-Beam Neutralization Physics
+# RF-Bunched Beam Space-Charge Neutralization
 
-## 1. Overview
+## 1. Physics Context and Geometry Constraint
 
-In cyclotron axial injection lines, the proton beam passes through an upstream RF buncher prior to entering the plasma neutralizer cell:
+In the baseline axial-injection beamline for the compact cyclotron:
 
-$$\text{buncher} \rightarrow \text{plasma neutralizer} \rightarrow \text{solenoid} \rightarrow \text{quadrupoles} \rightarrow \text{inflector}$$
+$$\text{buncher} \rightarrow \text{plasma neutralizer} \rightarrow \text{solenoid} \rightarrow \text{quadrupole Q1} \rightarrow \text{quadrupole Q2} \rightarrow \text{spiral inflector}$$
 
-RF bunching concentrates beam current into periodic micro-bunches, creating a high peak current $I_{\text{peak}}$ relative to the time-averaged current $I_{\text{avg}}$.
+The buncher is situated **upstream** of the plasma neutralizer.
 
----
-
-## 2. Definitions and Kinematics
-
-- $I_{\text{avg}}$: Time-averaged beam current
-- $B_f$: Bunching factor ($B_f = I_{\text{peak}} / I_{\text{avg}} \ge 1$)
-- $I_{\text{peak}} = B_f \cdot I_{\text{avg}}$
-- $f_{\text{RF}}$: RF frequency (e.g. $50\text{ MHz}$)
-- $\Delta \phi$: Bunch phase width in degrees
-- $\Delta t_b = \frac{\Delta \phi}{360^{\circ} \cdot f_{\text{RF}}}$: Bunch time width
-- $\Delta z_b = v_{\text{beam}} \cdot \Delta t_b = \beta c \Delta t_b$: Bunch spatial length
+Consequently, the neutralizer receives an already RF-bunched proton beam. The plasma response time $\tau_{\text{plasma}} = 1/\omega_{pe}$ is short compared to the macro-pulse, but plasma ions and background electrons form a quasi-steady background over many RF cycles ($f_{\text{RF}} \approx 50\text{ MHz}$, $T_{\text{RF}} \approx 20\text{ ns}$).
 
 ---
 
-## 3. Effective Peak-Bunch Perveance
+## 2. RF Bunching Parameters and Formulas
 
-If a plasma column provides an average neutralization $\eta_{\text{avg}}$ over the RF period, the plasma electron density $n_e$ responds primarily to the DC component if the electron plasma period or response time exceeds the bunch length.
+For a bunched proton beam with average beam current $I_{\text{avg}}$ and RF frequency $f_{\text{RF}}$:
 
-Under this steady-state background approximation, the instantaneous peak-bunch space charge perveance ratio is given by:
+- **Bunch Phase Width**: $\Delta \phi$ [degrees]
+- **Bunch Duration**: $\Delta t_b = \frac{\Delta \phi}{360^\circ f_{\text{RF}}}$
+- **Bunch Length**: $\Delta z_b = v_p \Delta t_b = \beta c \Delta t_b$
+- **Bunching Factor**: $B_f = \frac{I_{\text{peak}}}{I_{\text{avg}}}$
+- **Peak Current**: $I_{\text{peak}} = B_f \cdot I_{\text{avg}}$
+- **Uncompensated Peak Perveance**: $K_{0,\text{peak}} = B_f \cdot K_0$
+
+---
+
+## 3. Average vs Peak-Bunch Space-Charge Compensation
+
+If the plasma column reaches steady-state average neutralization $\eta_{\text{avg}} = N_e / N_p$, the average effective perveance is:
+
+$$\frac{K_{\text{eff,avg}}}{K_0} = 1 - \eta_{\text{avg}}$$
+
+However, during peak-bunch passage, the instantaneous space-charge charge density in the core is $B_f$ times higher than the average charge density. Thus, the effective peak perveance reduction ratio is:
 
 $$\frac{K_{\text{eff,peak}}}{K_{0,\text{peak}}} \approx 1 - \frac{\eta_{\text{avg}}}{B_f}$$
 
-### Physical Implications
-
-1. **Space-Charge Dilution**: Even if the plasma cell achieves high average neutralization ($\eta_{\text{avg}} \approx 0.90$), a high bunching factor (e.g., $B_f = 5$) reduces the effective peak neutralization to:
-
-$$\frac{K_{\text{eff,peak}}}{K_{0,\text{peak}}} \approx 1 - \frac{0.90}{5} = 0.82$$
-
-This means $82\%$ of the uncompensated peak space charge remains active during bunch passage.
-2. **Design Requirement**: High-current axial injection systems must evaluate space charge optics at peak bunch current rather than assuming $100\%$ DC space-charge cancellation.
+### Interpretation Limits:
+- For $B_f = 5$ and $\eta_{\text{avg}} = 0.90$, $\frac{K_{\text{eff,peak}}}{K_{0,\text{peak}}} \approx 1 - \frac{0.90}{5} = 0.82$.
+- Although average space-charge force is reduced by $90\%$, peak-bunch space-charge force is reduced by only $18\%$.
+- Journal papers must clearly distinguish between average and peak-bunch perveance reduction to avoid overstating space-charge compensation for RF-bunched beams.
