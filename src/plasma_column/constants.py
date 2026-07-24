@@ -10,6 +10,7 @@ import math
 # Fundamental physical constants (CODATA 2018 / standard physics values)
 C: float = 299792458.0                # Speed of light [m/s]
 QE: float = 1.602176634e-19           # Elementary charge [C]
+ELEMENTARY_CHARGE: float = QE         # Alias for QE
 ME: float = 9.1093837015e-31          # Electron mass [kg]
 MP: float = 1.67262192369e-27         # Proton mass [kg]
 AMU: float = 1.66053906660e-27        # Atomic mass unit [kg]
