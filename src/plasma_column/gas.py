@@ -144,3 +144,16 @@ class CrossSectionDatabase:
         energies_cm, sigmas, meta = load_cross_section_table(file_path)
         e_cm = lab_to_cm_energy(e_lab_eV, m_projectile=MP, m_target=m_target)
         return interpolate_cross_section(energies_cm, sigmas, e_cm)
+
+
+def get_h2_cross_section(e_lab_keV: float = 30.0) -> float:
+    """Returns proton-impact ionization cross section [m^2] for H2 at e_lab_keV."""
+    db = CrossSectionDatabase()
+    return db.get_proton_impact_cross_section("H2", e_lab_keV * 1000.0)
+
+
+def get_kr_cross_section(e_lab_keV: float = 30.0) -> float:
+    """Returns proton-impact ionization cross section [m^2] for Kr at e_lab_keV."""
+    db = CrossSectionDatabase()
+    return db.get_proton_impact_cross_section("Kr", e_lab_keV * 1000.0)
+

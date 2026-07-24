@@ -1,0 +1,18 @@
+# Verification Case: No Gas (Vacuum Reference)
+case_name: verification_no_gas
+method_category: mcc_verification
+
+beam:
+  energy_keV: 30.0
+  current_mA: 10.0
+  particle_count: 1000
+
+plasma:
+  gas: none
+  pressure_torr: 0.0
+  temperature_k: 300.0
+  cross_section_m2: 0.0
+
+numerics:
+  max_steps: 100
+  dt_s: 1.0e-11

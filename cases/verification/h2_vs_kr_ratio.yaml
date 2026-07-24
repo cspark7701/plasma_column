@@ -1,0 +1,18 @@
+# Verification Case: H2 vs Kr Ionization Cross Section Ratio Comparison
+case_name: verification_h2_vs_kr_ratio
+method_category: mcc_verification
+
+beam:
+  energy_keV: 30.0
+  current_mA: 10.0
+  particle_count: 1000
+
+plasma:
+  pressure_torr: 1.0e-5
+  temperature_k: 300.0
+  sigma_h2_m2: 1.25e-20
+  sigma_kr_m2: 1.45e-19
+
+numerics:
+  max_steps: 100
+  dt_s: 1.0e-11

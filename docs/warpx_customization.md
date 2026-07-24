@@ -60,3 +60,21 @@ Every simulation run executed via `scripts/run_case.py` or `scripts/run_scan.py`
 - WarpX dirty status and list of modified files
 
 This guarantees full auditability and reproducibility for every simulation result.
+
+---
+
+## 6. Verification and Benchmarking Suite
+
+The verification suite for custom ion-impact MCC is implemented in [`scripts/run_mcc_verification.py`](file:///home/cspark/Work/projects/plasma_column/scripts/run_mcc_verification.py) and [`scripts/analyze_mcc_verification.py`](file:///home/cspark/Work/projects/plasma_column/scripts/analyze_mcc_verification.py).
+
+### Summary of Verification Tests
+1. **Test 1 — No-gas test**: Verified zero ionization rate when $p = 0$.
+2. **Test 2 — Zero cross-section test**: Verified zero ionization rate when $\sigma_i = 0$.
+3. **Test 3 — Fixed cross-section rate test**: Verified ionization rate matches analytical $dN_e/dt = N_p n_{\text{gas}} \sigma_i v_p$.
+4. **Test 4 — H2 vs Kr cross-section ratio**: Verified secondary electron creation ratio matches $\sigma_{\text{Kr}}/\sigma_{\text{H}_2}$.
+5. **Test 5 — Time-step convergence**: Verified collision probability $P = 1 - \exp(-n_{\text{gas}} \sigma_i v_p \Delta t)$ converges as $\Delta t \to 0$.
+6. **Test 6 — Macroparticle weight conservation**: Verified physical particle count $N_{\text{phys}} = w \cdot N_{\text{macro}}$.
+7. **Test 7 — Energy bookkeeping**: Verified secondary electron energy assignment ($E_{e,\text{sec}} \approx 10\text{ eV}$).
+
+For detailed verification results, see [`docs/verification/custom_ion_impact_mcc_validation.md`](file:///home/cspark/Work/projects/plasma_column/docs/verification/custom_ion_impact_mcc_validation.md).
+
