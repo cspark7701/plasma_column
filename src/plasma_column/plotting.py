@@ -16,6 +16,22 @@ import numpy as np
 import pandas as pd
 
 
+def setup_publication_style() -> None:
+    """Configures Matplotlib default rcParams for publication-quality figures."""
+    plt.rcParams.update({
+        "font.size": 11,
+        "axes.labelsize": 12,
+        "axes.titlesize": 13,
+        "xtick.labelsize": 10,
+        "ytick.labelsize": 10,
+        "legend.fontsize": 10,
+        "figure.titlesize": 14,
+        "axes.grid": True,
+        "grid.linestyle": "--",
+        "grid.alpha": 0.5,
+    })
+
+
 def save_figure(fig: plt.Figure, output_path_basename: str | Path) -> tuple[Path, Path]:
     """
     Saves matplotlib figure to both .png and .pdf formats as required by project guidelines.

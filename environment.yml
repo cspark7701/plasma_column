@@ -1,0 +1,15 @@
+name: warpx-dev
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.10
+  - numpy
+  - scipy
+  - matplotlib
+  - pandas
+  - pyyaml
+  - pytest
+  - pip
+  - pip:
+      - -e .

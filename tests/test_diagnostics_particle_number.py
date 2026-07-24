@@ -1,0 +1,90 @@
+"""
+tests/test_diagnostics_particle_number.py
+
+Unit tests for particle number diagnostic parsing and local core neutralization metrics.
+"""
+
+import sys
+from pathlib import Path
+import tempfile
+import textwrap
+import numpy as np
+import pandas as pd
+import pytest
+
+# Ensure src is in sys.path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+
+from plasma_column.diagnostics import (
+    load_particle_number_diagnostic,
+    compute_particle_number_metrics,
+    compute_local_core_neutralization,
+    warn_global_count_limitation,
+)
+
+
+def test_particle_number_parsing():
+    content = textwrap.dedent("""\
+        # step time species0_macro species1_macro species2_macro Np Ne Ni
+        0 0.0 100 0 0 1000 0 0
+        1 1e-9 100 50 10 1000 500 100
+        2 2e-9 100 90 20 1000 900 200
+    """)
+    with tempfile.NamedTemporaryFile("w+", delete=False, suffix=".txt") as tmp:
+        tmp.write(content)
+        tmp_path = Path(tmp.name)
+
+    try:
+        df = load_particle_number_diagnostic(tmp_path)
+        assert len(df) == 3
+        assert "Np" in df.columns or "col_0" in df.columns
+    finally:
+        tmp_path.unlink()
+
+
+def test_particle_number_metrics():
+    data = {
+        "step": [0, 1, 2],
+        "time": [0.0, 1e-9, 2e-9],
+        "Np": [1000.0, 1000.0, 1000.0],
+        "Ne": [0.0, 500.0, 900.0],
+        "Ni": [0.0, 100.0, 200.0],
+    }
+    df = pd.DataFrame(data)
+
+    with pytest.warns(UserWarning, match="Global particle-number ratios"):
+        res = compute_particle_number_metrics(df)
+
+    assert "eta_electron_only" in res.columns
+    assert "eta_net" in res.columns
+    assert "keff_over_k0" in res.columns
+
+    # Row 2 check: Ne=900, Ni=200, Np=1000 -> eta_electron=0.9, eta_net=0.7, K_eff/K0=0.3
+    assert res.loc[2, "eta_electron_only"] == 0.9
+    assert res.loc[2, "eta_net"] == 0.7
+    assert pytest.approx(res.loc[2, "keff_over_k0"]) == 0.3
+
+
+def test_local_core_neutralization():
+    x = np.linspace(-0.005, 0.005, 10)
+    y = np.linspace(-0.005, 0.005, 10)
+    z = np.linspace(-0.05, 0.25, 20)
+
+    shape = (len(x), len(y), len(z))
+    np_3d = np.ones(shape) * 1.0e15
+    ne_3d = np.ones(shape) * 0.9e15
+    ni_3d = np.ones(shape) * 0.1e15
+
+    res = compute_local_core_neutralization(
+        ne_3d, ni_3d, np_3d, x, y, z, z_min_col=0.0, z_max_col=0.20, r_core=0.002
+    )
+
+    assert res["np_core_avg"] == 1.0e15
+    assert res["ne_core_avg"] == 0.9e15
+    assert res["ni_core_avg"] == 0.1e15
+    assert pytest.approx(res["eta_net_local"]) == 0.8
+    assert pytest.approx(res["keff_over_k0_local"]) == 0.2
+
+
+if __name__ == "__main__":
+    pytest.main([__file__])

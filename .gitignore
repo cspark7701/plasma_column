@@ -42,7 +42,9 @@ data
 logs
 logs_tmp
 runs
-tests
+tests/Backtrace*
+tests/inputs_*
+tests/warpx
 
 warpx_ion_impact_ionization_patch
 warpx_proton_impact_cross_sections_linear
