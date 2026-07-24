@@ -29,7 +29,30 @@ buncher -> plasma neutralizer -> solenoid -> quadrupole Q1 -> quadrupole Q2 -> s
 
 ---
 
-## 4. Repository Structure
+## 4. Step-by-Step Publication Workflow
+
+For detailed instructions on running simulations for publication-quality figures, papers, and presentations, see [`docs/publication_workflow.md`](file:///home/cspark/Work/projects/plasma_column/docs/publication_workflow.md).
+
+### Quick Summary:
+1. **Environment Check**: `python scripts/print_environment.py`
+2. **Run Standard Cases**: `python scripts/run_case.py --case cases/baseline_h2.yaml`
+3. **Run C++ MCC PICMI**: `python plasma_column_mcc_picmi_v7.py --output_dir runs/cxx_H2_mcc --gas H2 --pressure_torr 1e-5 --run`
+4. **Postprocess Case Diagnostics**: `python scripts/postprocess_case.py --case-dir runs/seeded_H2_baseline`
+5. **Notebook Analysis**: Open [`run_plasma_column_method_comparison.ipynb`](file:///home/cspark/Work/projects/plasma_column/run_plasma_column_method_comparison.ipynb) and [`plasma_column_analysis_plots_v2.ipynb`](file:///home/cspark/Work/projects/plasma_column/plasma_column_analysis_plots_v2.ipynb)
+6. **Generate Figures & Manifest**: `python scripts/make_plots.py`
+
+---
+
+## 5. Primary Notebooks
+
+1. [`run_plasma_column_method_comparison.ipynb`](file:///home/cspark/Work/projects/plasma_column/run_plasma_column_method_comparison.ipynb): Method comparison across Vacuum, Seeded, Callback, and C++ MCC runs.
+2. [`plasma_column_analysis_plots_v2.ipynb`](file:///home/cspark/Work/projects/plasma_column/plasma_column_analysis_plots_v2.ipynb): Main front-end analysis and figure generation notebook.
+3. [`run_python_callback_source_diagnostics_v2.ipynb`](file:///home/cspark/Work/projects/plasma_column/run_python_callback_source_diagnostics_v2.ipynb): Diagnostics notebook for Python callback dynamic pair creation.
+4. [`run_seeded_full_transport_diagnostics.ipynb`](file:///home/cspark/Work/projects/plasma_column/run_seeded_full_transport_diagnostics.ipynb): Detailed beam envelope and RMS emittance transport diagnostics.
+
+---
+
+## 6. Repository Structure
 
 ```text
 plasma_column/
@@ -44,6 +67,7 @@ plasma_column/
     method_comparison.yaml
   docs/                  # Documentation, physics notes, patches, & task logs
     environment.md
+    publication_workflow.md
     refactor_plan.md
     warpx_customization.md
     method_comparison.md
@@ -81,7 +105,7 @@ plasma_column/
 
 ---
 
-## 5. Environment Setup
+## 7. Environment Setup
 
 Activate the pre-configured `warpx-dev` conda environment:
 
@@ -99,7 +123,7 @@ python scripts/print_environment.py
 
 ---
 
-## 6. Quick Dry-Run Verification
+## 8. Quick Dry-Run Verification
 
 Validate parameters and write `metadata.json` without performing long PIC steps:
 
@@ -114,49 +138,7 @@ python scripts/run_scan.py --matrix cases/method_comparison.yaml --dry_run
 
 ---
 
-## 7. Running a Simulation Case
-
-To execute a simulation case:
-
-```bash
-python scripts/run_case.py --case cases/baseline_h2.yaml
-```
-
-Each run writes to `runs/<case_name>/` containing:
-- `config.yaml`: Parameter configuration
-- `metadata.json`: Machine-readable execution metadata (git hash, conda env, WarpX diff status)
-- `run.log`: Console execution log
-- Diagnostic data files and plots
-
----
-
-## 8. Postprocessing Diagnostics
-
-To extract global neutralization ratios ($\eta_{\text{electron\_only}}, \eta_{\text{net}}, K_{\text{eff}}/K_0$) and local core densities:
-
-```bash
-python scripts/postprocess_case.py --case-dir runs/seeded_H2_baseline
-```
-
-Output: `runs/seeded_H2_baseline/neutralization_from_particle_number.csv`
-
----
-
-## 9. Generating Figures
-
-To generate all presentation, proceeding, and notebook figures:
-
-```bash
-python scripts/make_plots.py
-```
-
-Outputs:
-- Figures saved to `plots/` in both **PNG** (300 DPI) and **PDF** formats.
-- Machine-readable manifest: [`plots/manifest.csv`](file:///home/cspark/Work/projects/plasma_column/plots/manifest.csv)
-
----
-
-## 10. Interpreting $K_{\text{eff}}/K_0$
+## 9. Interpreting $K_{\text{eff}}/K_0$
 
 - **$K_{\text{eff}}/K_0 = 1.0$**: Uncompensated space charge (vacuum beam).
 - **$0.0 < K_{\text{eff}}/K_0 < 1.0$**: Partial space-charge compensation.
@@ -165,7 +147,7 @@ Outputs:
 
 ---
 
-## 11. Bunched-Beam Caveat
+## 10. Bunched-Beam Caveat
 
 Because the RF buncher is located upstream of the plasma cell, the proton beam enters as periodic micro-bunches ($B_f \approx 5$).
 
@@ -177,7 +159,7 @@ For $B_f = 5$ and $\eta_{\text{avg}} = 90\%$, $K_{\text{eff,peak}}/K_{0,\text{pe
 
 ---
 
-## 12. WarpX Source Customization
+## 11. WarpX Source Customization
 
 Self-consistent proton-impact ionization ($p^+ + \text{Gas} \rightarrow p^+ + \text{Gas}^+ + e^-$) uses custom C++ extensions added to the local WarpX source tree (`/home/cspark/Work/simulation_codes-working/warpx`).
 
@@ -186,14 +168,7 @@ Self-consistent proton-impact ionization ($p^+ + \text{Gas} \rightarrow p^+ + \t
 
 ---
 
-## 13. Data and Output Policy
-
-- Do **not** commit large simulation plotfiles, checkpoint directories, or raw binary outputs to git.
-- Only commit modular Python source code, YAML case definitions, documentation, and lightweight summary CSV/figure manifests.
-
----
-
-## 14. Repository Audit & Testing
+## 12. Repository Audit & Testing
 
 To run the complete unit test suite and repository audit:
 
