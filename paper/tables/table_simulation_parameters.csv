@@ -1,0 +1,8 @@
+Setting,Value
+Domain Grid Resolution,32 x 32 x 256 cells
+"Domain Extents (X, Y, Z)","[-10, 10] mm, [-10, 10] mm, [-20, 240] mm"
+Time Step dt,1.0 x 10^-11 s
+Beam Particles per Cell,4
+Plasma Particles per Cell,4
+Field Solver,Electrostatic / Electromagnetic PIC
+Collision Algorithm,Monte Carlo Collisions (MCC) / Custom Ion-Impact

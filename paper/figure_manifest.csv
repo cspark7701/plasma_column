@@ -1,0 +1,11 @@
+figure_id,filename,title
+Fig 1,fig01_axial_injection_concept,Axial Injection Concept
+Fig 2,fig02_plasma_neutralizer_module,Neutralizer Module Schematic
+Fig 3,fig03_analytical_neutralization_time,Analytical Neutralization Time
+Fig 4,fig04_local_plasma_density_profiles,Local Density Profiles
+Fig 5,fig05_local_Keff_over_K0_vs_time,Local Keff/K0 vs Time
+Fig 6,fig06_bunched_beam_interpretation,Bunched-Beam Interpretation
+Fig 7,fig07_beam_envelope_to_inflector,Beam Envelope to Inflector
+Fig 8,fig08_inflector_acceptance_transmission,Inflector Acceptance Transmission
+Fig 9,fig09_parameter_scan_summary,Parameter Scan Summary
+Fig 10,fig10_numerical_validation,Numerical Validation
